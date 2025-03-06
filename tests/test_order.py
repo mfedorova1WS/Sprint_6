@@ -27,12 +27,12 @@ def test_make_order_with_valid_data(order_page, driver, name_value, surname_valu
 
 def test_scooter_logo_redirects_from_order_page_to_main(driver):
     driver.get(Url.ORDER_PAGE_URL)
-    driver.find_element(*CommonLocators.scooter_logo_button).click()
+    driver.find_element(*CommonLocators.SCOOTER_LOGO_BUTTON).click()
     assert driver.current_url == Url.MAIN_PAGE_URL
 
 def test_yandex_logo_redirects_from_order_page_to_dzen_in_new_tab(driver):
     driver.get(Url.ORDER_PAGE_URL)
-    driver.find_element(*CommonLocators.yandex_logo_button).click()
+    driver.find_element(*CommonLocators.YANDEX_LOGO_BUTTON).click()
     driver.switch_to.window(driver.window_handles[-1])
     WebDriverWait(driver, 5).until(expected_conditions.url_contains(Url.DZEN_PAGE_URL))
     assert driver.current_url == Url.DZEN_PAGE_URL

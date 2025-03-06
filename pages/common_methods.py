@@ -9,13 +9,13 @@ class CommonMethod:
         try:
             # Ожидаем появления кнопки закрытия кук
             WebDriverWait(driver, 3).until(
-                expected_conditions.visibility_of_element_located(CommonLocators.accept_cookie_button)
+                expected_conditions.visibility_of_element_located(CommonLocators.ACCEPT_COOKIE_BUTTON)
             )
             # Если кнопка есть, кликаем на принятие кук
-            driver.find_element(*CommonLocators.accept_cookie_button).click()
+            driver.find_element(*CommonLocators.ACCEPT_COOKIE_BUTTON).click()
             # Ждем, пока кнопка исчезнет
             WebDriverWait(driver, 3).until(
-                expected_conditions.invisibility_of_element_located(CommonLocators.accept_cookie_button)
+                expected_conditions.invisibility_of_element_located(CommonLocators.ACCEPT_COOKIE_BUTTON)
             )
         except TimeoutException:
             # Если кнопка не появилась, просто выходим из метода
