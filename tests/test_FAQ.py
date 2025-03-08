@@ -1,91 +1,18 @@
-from tests.conftest import main_page
+import pytest
 from locators.main_page_locators import MainPageLocators
-from url import Url
 
 
-def test_click_question_1_and_get_answer(main_page, driver):
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_1)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_1)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Сутки — 400 рублей. Оплата курьеру — наличными или картой."
-    assert actual_answer == expected_answer
-
-def test_click_question_2_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_2)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_2)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."
-    assert actual_answer == expected_answer
-
-def test_click_question_3_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_3)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_3)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30."
-    assert actual_answer == expected_answer
-
-def test_click_question_4_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_4)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_4)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Только начиная с завтрашнего дня. Но скоро станем расторопнее."
-    assert actual_answer == expected_answer
-
-def test_click_question_5_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_5)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_5)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010."
-    assert actual_answer == expected_answer
-
-def test_click_question_6_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_6)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_6)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится."
-    assert actual_answer == expected_answer
-
-def test_click_question_7_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_7)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_7)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."
-    assert actual_answer == expected_answer
-
-def test_click_question_8_and_get_answer(main_page, driver):
-    # Открываем главную страницу
-    driver.get(Url.MAIN_PAGE_URL)
-    # Кликаем по вопросу
-    main_page.click_button(MainPageLocators.QUESTION_8)
-    # Получаем ответ на вопрос
-    actual_answer = main_page.get_answer(MainPageLocators.ANSWER_8)
-    # Сравниваем ожидаемый и фактический текст ответа на вопрос
-    expected_answer = "Да, обязательно. Всем самокатов! И Москве, и Московской области."
+@pytest.mark.parametrize("question_locator, answer_locator, expected_answer", [
+    (MainPageLocators.QUESTION_1, MainPageLocators.ANSWER_1, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."),
+    (MainPageLocators.QUESTION_2, MainPageLocators.ANSWER_2, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."),
+    (MainPageLocators.QUESTION_3, MainPageLocators.ANSWER_3, "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30."),
+    (MainPageLocators.QUESTION_4, MainPageLocators.ANSWER_4, "Только начиная с завтрашнего дня. Но скоро станем расторопнее."),
+    (MainPageLocators.QUESTION_5, MainPageLocators.ANSWER_5, "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010."),
+    (MainPageLocators.QUESTION_6, MainPageLocators.ANSWER_6, "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится."),
+    (MainPageLocators.QUESTION_7, MainPageLocators.ANSWER_7, "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."),
+    (MainPageLocators.QUESTION_8, MainPageLocators.ANSWER_8, "Да, обязательно. Всем самокатов! И Москве, и Московской области."),
+])
+def test_click_question_and_get_answer(main_page, driver, question_locator, answer_locator, expected_answer):
+    main_page.click_on_question(question_locator)
+    actual_answer = main_page.get_answer(answer_locator)
     assert actual_answer == expected_answer

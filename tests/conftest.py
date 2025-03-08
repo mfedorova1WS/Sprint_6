@@ -2,7 +2,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
+from pages.base_page import BasePage
 from pages.main_page import MainPage
+
 
 @pytest.fixture(scope="function")
 def driver():
@@ -16,6 +18,11 @@ def driver():
     # Закрытие браузера после выполнения теста
     _driver.quit()
 
+
+@pytest.fixture(scope="function")
+def base_page(driver):
+    # Создание экземпляра класса MainPage
+    return BasePage(driver)
 
 @pytest.fixture(scope="function")
 def main_page(driver):
